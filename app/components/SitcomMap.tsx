@@ -169,15 +169,141 @@ export default function SitcomMap() {
 
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <header className="bg-white border-b border-gray-200 px-3 py-2 flex-shrink-0">
-        <div className="flex items-center gap-2">
 
-          {/* Title */}
+        {/* ── Mobile layout: 2 rows ──────────────────────────────────────── */}
+
+        {/* Mobile row 1: title + view toggle + lang */}
+        <div className="flex items-center gap-2 sm:hidden">
+          <h1 className="flex-1 min-w-0 text-sm font-semibold text-gray-900 truncate">
+            🎬 {lang === "he" ? "מפת סיטקומים" : "Sitcom Map"}
+          </h1>
+
+          {/* View toggle */}
+          <div className="flex rounded-lg border border-gray-200 overflow-hidden flex-shrink-0">
+            <button
+              onClick={() => setViewMode("map")}
+              className="flex items-center justify-center w-8 h-8 transition-colors"
+              style={viewMode === "map" ? { background: "#1f2937", color: "#fff" } : { background: "#fff", color: "#6b7280" }}
+              title={t.map}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+                <line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+              </svg>
+            </button>
+            <button
+              onClick={() => setViewMode("globe")}
+              className="flex items-center justify-center w-8 h-8 transition-colors border-l border-gray-200"
+              style={viewMode === "globe" ? { background: "#1f2937", color: "#fff" } : { background: "#fff", color: "#6b7280" }}
+              title={t.globe}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </button>
+          </div>
+
+          {/* Lang toggle */}
+          <button
+            onClick={() => setLang((l) => l === "he" ? "en" : "he")}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-xs font-bold text-gray-600 flex-shrink-0"
+          >
+            {t.lang}
+          </button>
+        </div>
+
+        {/* Mobile row 2: filter (flex-1) + search icon */}
+        <div className="flex items-center gap-2 mt-2 sm:hidden">
+          <div className="relative flex-1" ref={filterRef}>
+            <button
+              onClick={() => { setFilterOpen((v) => !v); setSearchOpen(false); }}
+              className="w-full flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-colors"
+              style={activeTag
+                ? { background: TAG_COLORS[activeTag], color: "#fff", borderColor: TAG_COLORS[activeTag] }
+                : filterOpen
+                  ? { background: "#1f2937", color: "#fff", borderColor: "#1f2937" }
+                  : { background: "#fff", color: "#374151", borderColor: "#d1d5db" }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+              </svg>
+              <span className="flex-1 truncate">{activeTag ? tagLabel(activeTag) : t.filterPlaceholder}</span>
+              {activeTag && (
+                <span onClick={(e) => { e.stopPropagation(); selectTag(null); }} className="font-bold text-base leading-none opacity-70">×</span>
+              )}
+            </button>
+
+            {filterOpen && (
+              <div
+                className="absolute top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 p-3"
+                style={{ width: "min(420px, 92vw)", direction: dir, [lang === "he" ? "right" : "left"]: 0 }}
+              >
+                <button
+                  onClick={() => selectTag(null)}
+                  className="w-full mb-2 px-3 py-1.5 rounded-lg text-sm border transition-colors"
+                  style={activeTag === null
+                    ? { background: "#1f2937", color: "#fff", borderColor: "#1f2937", textAlign: lang === "he" ? "right" : "left" }
+                    : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
+                >
+                  {t.all} — {shows.length} {t.sitcoms}
+                </button>
+                <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))" }}>
+                  {ALL_TAGS.map((tag) => (
+                    <button key={tag} onClick={() => selectTag(tag)}
+                      className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs border transition-colors"
+                      style={activeTag === tag
+                        ? { background: TAG_COLORS[tag], color: "#fff", borderColor: TAG_COLORS[tag], textAlign: lang === "he" ? "right" : "left" }
+                        : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
+                    >
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }} />
+                      <span className="truncate">{tagLabel(tag)}</span>
+                      <span className="opacity-60 flex-shrink-0 ml-auto">({tagCount(tag)})</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Search */}
+          {searchOpen ? (
+            <div className="relative flex items-center flex-1">
+              <input
+                autoFocus
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t.searchPlaceholder}
+                className="w-full border border-gray-300 rounded-lg px-2.5 py-1.5 text-sm text-gray-800 outline-none focus:border-blue-400"
+                style={{ direction: dir }}
+              />
+              <button
+                onClick={() => { setSearchOpen(false); setQuery(""); }}
+                className={`absolute ${lang === "he" ? "left-2" : "right-2"} text-gray-400 text-base leading-none`}
+              >×</button>
+            </div>
+          ) : (
+            <button
+              onClick={() => { setSearchOpen(true); setFilterOpen(false); }}
+              className="flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 text-gray-500 flex-shrink-0"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </button>
+          )}
+        </div>
+
+        {/* ── Desktop layout: single row ─────────────────────────────────── */}
+        <div className="hidden sm:flex items-center gap-2">
           <div className="flex-1 min-w-0">
-            <h1 className="text-base font-medium text-gray-900 leading-tight truncate">🎬 {t.title}</h1>
+            <h1 className="text-base font-semibold text-gray-900 leading-tight truncate">🎬 {t.title}</h1>
             <p className="text-xs text-gray-400">{shows.length} {t.sitcoms} · {ALL_TAGS.length} {t.countries}</p>
           </div>
 
-          {/* Filter button + dropdown */}
+          {/* Filter */}
           <div className="relative" ref={filterRef}>
             <button
               onClick={() => { setFilterOpen((v) => !v); setSearchOpen(false); }}
@@ -193,20 +319,15 @@ export default function SitcomMap() {
               </svg>
               <span>{activeTag ? tagLabel(activeTag) : t.filterPlaceholder}</span>
               {activeTag && (
-                <span
-                  onClick={(e) => { e.stopPropagation(); selectTag(null); }}
-                  className="opacity-70 hover:opacity-100 font-bold"
-                >×</span>
+                <span onClick={(e) => { e.stopPropagation(); selectTag(null); }} className="opacity-70 hover:opacity-100 font-bold">×</span>
               )}
             </button>
 
-            {/* Dropdown panel */}
             {filterOpen && (
               <div
                 className="absolute top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 p-3"
                 style={{ width: "min(420px, 92vw)", direction: dir, [lang === "he" ? "right" : "left"]: 0 }}
               >
-                {/* All button */}
                 <button
                   onClick={() => selectTag(null)}
                   className="w-full mb-2 px-3 py-1.5 rounded-lg text-sm border transition-colors"
@@ -216,22 +337,15 @@ export default function SitcomMap() {
                 >
                   {t.all} — {shows.length} {t.sitcoms}
                 </button>
-
-                {/* Tag grid */}
                 <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(110px, 1fr))" }}>
                   {ALL_TAGS.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => selectTag(tag)}
+                    <button key={tag} onClick={() => selectTag(tag)}
                       className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs border transition-colors"
                       style={activeTag === tag
                         ? { background: TAG_COLORS[tag], color: "#fff", borderColor: TAG_COLORS[tag], textAlign: lang === "he" ? "right" : "left" }
                         : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
                     >
-                      <span
-                        className="w-2 h-2 rounded-full flex-shrink-0"
-                        style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }}
-                      />
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }} />
                       <span className="truncate">{tagLabel(tag)}</span>
                       <span className="opacity-60 flex-shrink-0 ml-auto">({tagCount(tag)})</span>
                     </button>
@@ -241,44 +355,37 @@ export default function SitcomMap() {
             )}
           </div>
 
-          {/* View toggle (map / globe) */}
+          {/* View toggle */}
           <div className="flex rounded-lg border border-gray-200 overflow-hidden text-sm flex-shrink-0">
             <button
               onClick={() => setViewMode("map")}
               className="flex items-center gap-1 px-2.5 py-1.5 transition-colors"
-              style={viewMode === "map"
-                ? { background: "#1f2937", color: "#fff" }
-                : { background: "#fff", color: "#6b7280" }}
-              title={t.map}
+              style={viewMode === "map" ? { background: "#1f2937", color: "#fff" } : { background: "#fff", color: "#6b7280" }}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
                 <line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
               </svg>
-              <span className="hidden sm:inline">{t.map}</span>
+              {t.map}
             </button>
             <button
               onClick={() => setViewMode("globe")}
               className="flex items-center gap-1 px-2.5 py-1.5 transition-colors border-l border-gray-200"
-              style={viewMode === "globe"
-                ? { background: "#1f2937", color: "#fff" }
-                : { background: "#fff", color: "#6b7280" }}
-              title={t.globe}
+              style={viewMode === "globe" ? { background: "#1f2937", color: "#fff" } : { background: "#fff", color: "#6b7280" }}
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="2" y1="12" x2="22" y2="12"/>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
               </svg>
-              <span className="hidden sm:inline">{t.globe}</span>
+              {t.globe}
             </button>
           </div>
 
-          {/* Language toggle */}
+          {/* Lang */}
           <button
             onClick={() => setLang((l) => l === "he" ? "en" : "he")}
-            className="flex items-center px-2.5 py-1.5 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 hover:border-gray-400 transition-colors flex-shrink-0"
-            title={lang === "he" ? "Switch to English" : "עבור לעברית"}
+            className="px-2.5 py-1.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:border-gray-400 transition-colors flex-shrink-0"
           >
             {t.lang}
           </button>
@@ -293,7 +400,7 @@ export default function SitcomMap() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={t.searchPlaceholder}
-                  className="w-44 sm:w-60 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-800 outline-none focus:border-blue-400"
+                  className="w-60 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-gray-800 outline-none focus:border-blue-400"
                   style={{ direction: dir }}
                 />
                 <button
@@ -309,11 +416,12 @@ export default function SitcomMap() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
-                <span className="hidden sm:inline">{t.search}</span>
+                {t.search}
               </button>
             )}
           </div>
         </div>
+
       </header>
 
       {/* ── Main area ──────────────────────────────────────────────────── */}
