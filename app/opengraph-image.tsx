@@ -102,11 +102,12 @@ export default function OgImage() {
           <div
             style={{
               fontSize: 28,
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(255,255,255,0.55)",
               textAlign: "center",
+              letterSpacing: "1px",
             }}
           >
-            מפת סיטקומים עולמית
+            Interactive World Map of TV Sitcoms
           </div>
 
           <div
@@ -116,7 +117,7 @@ export default function OgImage() {
               gap: 12,
             }}
           >
-            {["🇺🇸 Friends", "🇬🇧 Fawlty Towers", "🇮🇱 שמש", "🇩🇪 Stromberg", "🇯🇵 Kodoku"].map((label) => (
+            {["🇺🇸 Friends", "🇬🇧 Fawlty Towers", "🇮🇱 Shemesh", "🇩🇪 Stromberg", "🇯🇵 Kiku-chan"].map((label) => (
               <div
                 key={label}
                 style={{
