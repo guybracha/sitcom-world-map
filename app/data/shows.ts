@@ -36,7 +36,32 @@ export type Tag =
   | "סעודי"
   | "יפני"
   | "קוריאני"
-  | "סיני";
+  | "סיני"
+  | "וייטנאמי"
+  | "ניגרי"
+  | "מצרי"
+  | "גאני"
+  | "אוסטרי"
+  | "הונגרי"
+  | "קרואטי"
+  | "סרבי"
+  | "בולגרי"
+  | "קפריסאי"
+  | "פרואני"
+  | "ונצואלאי"
+  | "אורוגוואי"
+  | "סלובני"
+  | "ארמני"
+  | "גאורגי"
+  | "איסלנדי"
+  | "תאילנדי"
+  | "נפאלי"
+  | "מלזי"
+  | "אינדונזי"
+  | "הונג קונגי"
+  | "סרי לנקי"
+  | "ג'מייקני"
+  | "פוארטו ריקאני";
 
 export interface Show {
   name: string;
@@ -191,11 +216,98 @@ export const shows: Show[] = [
   // ── בלגי ──────────────────────────────────────────────────────────────
   { name: "In de gloria", city: "גנט, פלנדריה, בלגיה", cityEn: "Ghent, Flanders, Belgium", lat: 51.053, lng: 3.720, years: "2000–2001", network: "Canvas", desc: "מוקומנטרי סאטירי פלמי שלועג לתוכניות ריאליטי — נחשב לאחד מהשיאים של הקומדיה הפלמית. שלושה עונות שהשפיעו על ז'אנר המוקומנטרי בבלגיה.", descEn: "Flemish satirical mockumentary mocking reality TV — considered one of the pinnacles of Flemish comedy. Three seasons that shaped the Belgian mockumentary genre.", tags: ["בלגי"] },
 
+  // ── יווני ──────────────────────────────────────────────────────────────
+  { name: "Η Πολυκατοικία", nameEn: "I Polykatoikia (The Apartment Building)", city: "אתונה, יוון", cityEn: "Athens, Greece", lat: 37.979, lng: 23.726, years: "2008–2011", network: "Mega Channel", desc: "קומדיית מצבים יוונית שמתרחשת בבניין דירות באתונה. 132 פרקים על שכנים מוזרים, אהבות ומריבות בבית משותף.", descEn: "Greek sitcom set in an Athens apartment building. 132 episodes of quirky neighbors, romances and feuds in a shared residential building.", tags: ["יווני"] },
+  { name: "Οι Απαράδεκτοι", nameEn: "Oi Aparadektoi (The Unacceptables)", city: "אתונה, יוון", cityEn: "Athens, Greece", lat: 37.984, lng: 23.728, years: "1990–1992", network: "Mega Channel", desc: "אחד הסיטקומים המוצלחים ביותר בהיסטוריה של הטלוויזיה היוונית — משפחה בלתי נסבלת ומצחיקה באתונה.", descEn: "One of the most successful sitcoms in Greek TV history — an insufferable yet hilarious family in Athens.", tags: ["יווני"] },
+
+  // ── וייטנאמי ──────────────────────────────────────────────────────────────
+  { name: "Gia đình là số 1", nameEn: "Gia dinh la so 1 (Family is Number One)", city: "הו צ'י מין סיטי, וייטנאם", cityEn: "Ho Chi Minh City, Vietnam", lat: 10.823, lng: 106.629, years: "2006–2014", network: "VTV3", desc: "הסיטקום הפופולרי ביותר בוייטנאם — מספר על משפחה מורחבת עם דורות שונים תחת קורת גג אחת. זכה לאהבת קהל עצומה ולמספר עונות מוצלחות.", descEn: "Vietnam's most popular sitcom — follows a multi-generational extended family living under one roof. Achieved massive audience love across multiple successful seasons.", tags: ["וייטנאמי"] },
+  { name: "My Best Gay Friends", city: "הו צ'י מין סיטי, וייטנאם", cityEn: "Ho Chi Minh City, Vietnam", lat: 10.776, lng: 106.700, years: "2012–2015", network: "YouTube", desc: "סדרת רשת וייטנאמית פורצת דרך על שלושה חברים גאים שחולקים דירה בהו צ'י מין סיטי. הפכה לתופעה תרבותית בקרב הקהילה ה-LGBTQ+ בוייטנאם.", descEn: "Groundbreaking Vietnamese web series about three gay friends sharing an apartment in Ho Chi Minh City. Became a cultural phenomenon within Vietnam's LGBTQ+ community.", tags: ["וייטנאמי"] },
+
+  // ── ניגרי ──────────────────────────────────────────────────────────────
+  { name: "Basi and Company", city: "לגוס, ניגריה", cityEn: "Lagos, Nigeria", lat: 6.524, lng: 3.379, years: "1986–1990", network: "NTA", desc: "הסיטקום האפריקאי הגדול ביותר — בסי הוא חולם גדול בלגוס שמנסה להתעשר בכל דרך אפשרית. בשיאו צפו בו 30 מיליון איש, ושודר ברחבי אפריקה.", descEn: "Africa's greatest sitcom — Basi is a big dreamer in Lagos who tries to get rich by any means. At peak it had 30 million viewers and was broadcast across Africa.", tags: ["ניגרי"] },
+  { name: "Papa Ajasco and Company", city: "לגוס, ניגריה", cityEn: "Lagos, Nigeria", lat: 6.455, lng: 3.406, years: "1997–כיום", network: "NTA / Wale Adenuga Productions", desc: "סיטקום משפחתי ניגרי אהוב שנוצר ב-1997 על ידי ואלה אדנוגה. משפחת אג'סקו ובני שכונתם מתמודדים עם סוגיות חברתיות בדרך קומית.", descEn: "Beloved Nigerian family sitcom created by Wale Adenuga in 1997. The Ajasco family and their neighbors tackle social issues with humor.", tags: ["ניגרי"] },
+
+  // ── דרום אפריקאי ──────────────────────────────────────────────────────────────
+  { name: "Suburban Bliss", city: "יוהנסבורג, דרום אפריקה", cityEn: "Johannesburg, South Africa", lat: -26.204, lng: 28.047, years: "1996–1997", network: "SABC", desc: "סיטקום דרום אפריקאי שעסק בשילוב גזעי אחרי האפרטהייד — משפחת ון טונדר הלבנה ומשפחת מוקוונה השחורה חיות זו לצד זו בפרברים.", descEn: "South African sitcom tackling racial integration post-apartheid — the white Van Tonder family and the Black Mokwena family live side by side in the suburbs.", tags: ["דרום אפריקאי"] },
+
+  // ── מצרי ──────────────────────────────────────────────────────────────
+  { name: "عايزة اتجوز", nameEn: "Ayza Atgawez (I Want to Get Married)", city: "קהיר, מצרים", cityEn: "Cairo, Egypt", lat: 30.044, lng: 31.235, years: "2010", network: "Egyptian TV", desc: "קומדיה מצרית עם הינד סברי על אישה מודרנית שמחפשת חתן ראוי — לועגת בחן לציפיות החברה ממסורת החתונה במצרים.", descEn: "Egyptian comedy with Hend Sabry about a modern woman searching for a suitable husband — gently mocking society's expectations around marriage in Egypt.", tags: ["מצרי"] },
+
+  // ── גאני ──────────────────────────────────────────────────────────────
+  { name: "An African City", city: "אקרה, גאנה", cityEn: "Accra, Ghana", lat: 5.603, lng: -0.187, years: "2014–2016", network: "YouTube", desc: "הגרסה האפריקאית של Sex and the City — חמש נשים מקצועיות שחזרו לאקרה אחרי שנים בחו\"ל ומנסות לבנות חיים בעיר המתפתחת.", descEn: "The African answer to Sex and the City — five professional women who returned to Accra after years abroad and try to build a life in the booming city.", tags: ["גאני"] },
+
+  // ── אוסטרי ──────────────────────────────────────────────────────────────
+  { name: "Ein echter Wiener geht nicht unter", nameEn: "Ein echter Wiener geht nicht unter (A Real Viennese Never Gives Up)", city: "וינה, אוסטריה", cityEn: "Vienna, Austria", lat: 48.175, lng: 16.372, years: "1975–1979", network: "ORF", desc: "קומדיה מעמד-פועלים אוסטרית על משפחת זקבאואר בפאבוריטן, הרובע העשירי של וינה. דיאלקט וינאי אותנטי הפך אותה לתופעה תרבותית — אחת הסדרות האוסטריות האהובות בכל הזמנים.", descEn: "Austrian working-class family comedy set in Vienna's Favoriten district. Authentic Viennese dialect made it a cultural phenomenon — one of Austria's most beloved series of all time.", tags: ["אוסטרי"] },
+  { name: "Kaisermühlen Blues", city: "וינה, אוסטריה", cityEn: "Vienna (Kaisermühlen district), Austria", lat: 48.215, lng: 16.430, years: "1992–2000", network: "ORF", desc: "דרמה קומית על חיי היומיום של עובדים ותושבים בשכונת קייזרמילן בוינה. טיפלה בגזענות, זרים ואי-סובלנות — ונחשבת לאחד ההישגים הגדולים בטלוויזיה האוסטרית.", descEn: "Comedy-drama about everyday life in Vienna's Kaisermühlen district, tackling racism, xenophobia and tolerance. Considered one of the greatest achievements in Austrian television.", tags: ["אוסטרי"] },
+
+  // ── הונגרי ──────────────────────────────────────────────────────────────
+  { name: "A mi kis falunk", nameEn: "A mi kis falunk (Our Little Village)", city: "פייקאסג (פיקטיבי), הונגריה", cityEn: "Pajkaszeg (fictional village), Hungary", lat: 47.162, lng: 19.503, years: "2017–כיום", network: "RTL", desc: "הסיטקום ההונגרי הפופולרי ביותר של העשור — חיי יומיום בכפר הונגרי פיקטיבי עם ראש עיר מושחת, כומר מגדל שרירים, שוטר טיפש ומאמן כדורגל פלירטטן.", descEn: "Hungary's most popular sitcom of the decade — everyday life in a fictional Hungarian village with a corrupt mayor, bodybuilding priest, dim policeman, and flirtatious football coach.", tags: ["הונגרי"] },
+
+  // ── קרואטי ──────────────────────────────────────────────────────────────
+  { name: "Bitange i princeze", nameEn: "Bitange i princeze (Punks and Princesses)", city: "זאגרב, קרואטיה", cityEn: "Zagreb, Croatia", lat: 45.815, lng: 15.982, years: "2005–2010", network: "HRT", desc: "חמישה חברים צעירים גרים בדירות סמוכות בזאגרב — הגרסה הקרואטית ל-Friends עם פרודיה ומריבות אינסופיות. אחד הסיטקומים הצבאוניים ביותר בהיסטוריה הקרואטית.", descEn: "Five young friends living in neighboring apartments in Zagreb — Croatia's answer to Friends, full of parody and endless bickering. One of the most-watched Croatian sitcoms ever.", tags: ["קרואטי"] },
+
+  // ── סרבי ──────────────────────────────────────────────────────────────
+  { name: "Ljubav, navika, panika", nameEn: "Ljubav, navika, panika (Love, Habit, Panic)", city: "בלגרד, סרביה", cityEn: "Belgrade, Serbia", lat: 44.787, lng: 20.457, years: "2005–2007", network: "RTV Pink", desc: "זוג גרוש שמאלץ לחלוק דירה בזמן גידול ילדיהן — זכה בפרס Golden Rose of Montreux כאחד הסיטקומים הטובים של 2005. נחשב לסיטקום הסרבי הטוב ביותר.", descEn: "A divorced couple forced to share an apartment while raising their daughters — won the Golden Rose of Montreux as one of the best sitcoms of 2005. Considered Serbia's finest sitcom.", tags: ["סרבי"] },
+
+  // ── בולגרי ──────────────────────────────────────────────────────────────
+  { name: "Домашен арест", nameEn: "Domashen Arest (House Arrest)", city: "סופיה, בולגריה", cityEn: "Sofia, Bulgaria", lat: 42.698, lng: 23.322, years: "2011–2013", network: "bTV", desc: "בכיר במשטרה מגיע למעצר בית — ומאלץ להתגורר עם גרושתו ואהובה. מופק בסגנון אמריקאי (כמו Everybody Loves Raymond) עם 4 עונות ו-86 פרקים.", descEn: "A senior police inspector sentenced to house arrest — forced to live with his ex-wife and her lover. Produced in American sitcom style (like Everybody Loves Raymond) with 4 seasons and 86 episodes.", tags: ["בולגרי"] },
+
+  // ── קפריסאי ──────────────────────────────────────────────────────────────
+  { name: "Βουρατε Γειτονοι", nameEn: "Vourate Geitonoi (Run Neighbors)", city: "ניקוסיה, קפריסין", cityEn: "Nicosia, Cyprus", lat: 35.166, lng: 33.367, years: "2001–2005", network: "Sigma TV", desc: "קומדיה על דיירי בניין בניקוסיה בהנהגת בעל הבית הקמצן ריקוס. הגיעה לדירוגי צפייה של 65–70% — הסיטקום הקפריסאי הפופולרי ביותר בכל הזמנים. זכה לעונת החייאה וסרט.", descEn: "Comedy about residents of a Nicosia apartment building led by the stingy landlord Rikkos. Achieved 65–70% viewer ratings — Cyprus's most popular sitcom ever. Got a revival season and a feature film.", tags: ["קפריסאי"] },
+
+  // ── פרואני ──────────────────────────────────────────────────────────────
+  { name: "Al fondo hay sitio", nameEn: "Al fondo hay sitio (There's Room at the Back)", city: "לימה, פרו", cityEn: "Lima, Peru", lat: -12.046, lng: -77.043, years: "2009–2016", network: "América Televisión", desc: "הדרמה-קומדיה הפרואנית הפופולרית ביותר — שתי משפחות משכונות שונות מוצאות עצמן שכנות ומתנגשות. שודרה ב-7 עונות עם אלפי פרקים ונצפתה בכל מדינות האנדים.", descEn: "Peru's most popular dramedy — two families from different social classes find themselves neighbors and clash constantly. Aired for 7 seasons with thousands of episodes, watched across the Andean countries.", tags: ["פרואני"] },
+
+  // ── ונצואלאי ──────────────────────────────────────────────────────────────
+  { name: "Radio Rochela", city: "קראקס, ונצואלה", cityEn: "Caracas, Venezuela", lat: 10.480, lng: -66.879, years: "1959–2010", network: "RCTV", desc: "תוכנית הקומדיה הוותיקה ביותר בהיסטוריה — 51 שנות שידור רצופות של סקצ'ים סאטיריים על חברה ופוליטיקה ונצואלית. מוכרת בספר גינס כתוכנית הקומדיה הוותיקה ביותר בעולם.", descEn: "The longest-running comedy show in history — 51 consecutive years of satirical sketches on Venezuelan society and politics. Listed in the Guinness Book of Records as the world's longest-running comedy show.", tags: ["ונצואלאי"] },
+
+  // ── אורוגוואי ──────────────────────────────────────────────────────────────
+  { name: "Decalegrón", city: "מונטווידאו, אורוגוואי", cityEn: "Montevideo, Uruguay", lat: -34.901, lng: -56.165, years: "1977–2002", network: "Saeta TV / Canal 10", desc: "תוכנית הקומדיה הוותיקה ביותר של אורוגוואי — 25 שנות הומור מעודן שזכו בפרסים רבים. הפכה לחלק בלתי נפרד מהתרבות האורוגוואית עם קומיקאים כמו חוליו פראדה.", descEn: "Uruguay's longest-running comedy show — 25 years of refined humor that won numerous awards. Became an inseparable part of Uruguayan culture featuring comedians like Julio Frade.", tags: ["אורוגוואי"] },
+
   // ── צ'ילאני ──────────────────────────────────────────────────────────────
   { name: "31 Minutos", city: "סנטיאגו, צ'ילה", cityEn: "Santiago, Chile", lat: -33.459, lng: -70.648, years: "2003–2005", network: "TVN", desc: "תוכנית חדשות בובות סאטירית צ'ילאנית — מגיש החדשות טוביאס ופנצ'ו לוקורנוז מדווחים על חדשות מומצאות. הפכה לתרבות פופ בצ'ילה ובמדינות דוברות ספרדית.", descEn: "Chilean satirical puppet news show — anchor Tobías Bodega and Pancho Loco report fabricated news. Became a pop-culture staple in Chile and across Spanish-speaking countries.", tags: ["צ'ילאני"] },
 
   // ── קולומביאני ──────────────────────────────────────────────────────────────
   { name: "Betty la fea", city: "בוגוטה, קולומביה", cityEn: "Bogotá, Colombia", lat: 4.711, lng: -74.072, years: "1999–2001", network: "RCN", desc: "בטי — מזכירה חכמה אך לא יפה בחברת אופנה בבוגוטה. נחשבת לטלנובלה הנצפית ביותר בהיסטוריה ועובדה ב-25+ מדינות. הגרסה האמריקאית 'Ugly Betty' זכתה ב-Golden Globe.", descEn: "Betty — a smart but unfashionable secretary at a Bogotá fashion company. Considered the most-watched telenovela in history and adapted in 25+ countries. The US version 'Ugly Betty' won a Golden Globe.", tags: ["קולומביאני"] },
+
+  // ── סלובני ──────────────────────────────────────────────────────────────
+  { name: "Naša mala klinika", nameEn: "Naša mala klinika (Our Little Clinic)", city: "לובליאנה, סלובניה", cityEn: "Ljubljana, Slovenia", lat: 46.056, lng: 14.505, years: "2004–2007", network: "Pop TV", desc: "סיטקום סלובני על צוות אקסנטרי במרפאה קטנה — 7 עונות ו-112 פרקים. זכה בארבעה פרסי ויקטור כסדרה הטלוויזיונית הטובה ביותר בסלובניה.", descEn: "Slovenian sitcom about an eccentric staff at a small clinic — 7 seasons and 112 episodes. Won four Viktor awards for best television series in Slovenia.", tags: ["סלובני"] },
+
+  // ── ארמני ──────────────────────────────────────────────────────────────
+  { name: "Ազիզյանները", nameEn: "The Azizyans", city: "ירוון, ארמניה", cityEn: "Yerevan, Armenia", lat: 40.177, lng: 44.503, years: "2016–2020", network: "Armenia TV", desc: "גארניק אזיזיאן — מוכר בגדים ומפרנס יחיד של משפחה כאוטית בירוון. אחד הסיטקומים הארמנים הפופולריים ביותר של העשור.", descEn: "Garnik Azizyan — a clothing store seller and sole breadwinner of a chaotic family in Yerevan. One of Armenia's most popular sitcoms of the decade.", tags: ["ארמני"] },
+
+  // ── גאורגי ──────────────────────────────────────────────────────────────
+  { name: "შუა ქალაქში", nameEn: "In the Middle of the City", city: "טביליסי, גאורגיה", cityEn: "Tbilisi, Georgia", lat: 41.694, lng: 44.833, years: "2007–2014", network: "Imedi TV", desc: "חבורת חברים בשכונת וואקה של טביליסי — כל אחד עם אורח חיים מוזר ומצבים מפתיעים. הסיטקום הגאורגי הפופולרי ביותר, שחזר ב-2014 עם המשך.", descEn: "A group of friends in Tbilisi's Vake neighborhood — each with an eccentric lifestyle and surprising situations. Georgia's most popular sitcom, which returned in 2014 with a continuation.", tags: ["גאורגי"] },
+
+  // ── איסלנדי ──────────────────────────────────────────────────────────────
+  { name: "Næturvaktin", nameEn: "Næturvaktin (The Night Shift)", city: "רייקיאוויק, איסלנד", cityEn: "Reykjavik, Iceland", lat: 64.128, lng: -21.827, years: "2007", network: "Skjár einn", desc: "שלושה גברים בתחנת דלק ברייקיאוויק מתמודדים עם שעמום, לקוחות מוזרים ובוס נוירוטי. החלק הראשון בטרילוגיה האיסלנדית האגדית — נחשב לאחד הסיטקומים הטובים אי פעם באיסלנד.", descEn: "Three men working at a Reykjavik gas station battle boredom, strange customers and a neurotic boss. The first in a legendary Icelandic trilogy — considered one of the best sitcoms ever made in Iceland.", tags: ["איסלנדי"] },
+
+  // ── תאילנדי ──────────────────────────────────────────────────────────────
+  { name: "บางรักซอย 9", nameEn: "Bang Rak Soi 9", city: "בנגקוק, תאילנד", cityEn: "Bangkok, Thailand", lat: 13.723, lng: 100.514, years: "2003–2012", network: "Channel 9 MCOT", desc: "אדריכל עובר מעיר קטנה לבנגקוק ושוכר בית בשכונת בנג ראק — 11 עונות ו-438 פרקים. אחד הסיטקומים הארוכים ביותר בהיסטוריית הטלוויזיה התאילנדית.", descEn: "An architect relocates from a small town to Bangkok and rents a house in the Bang Rak district — 11 seasons and 438 episodes. One of the longest-running sitcoms in Thai TV history.", tags: ["תאילנדי"] },
+
+  // ── נפאלי ──────────────────────────────────────────────────────────────
+  { name: "Meri Bassai", nameEn: "Meri Bassai", city: "כפר נפאלי (פיקטיבי)", cityEn: "Rural Nepal (fictional village)", lat: 27.700, lng: 85.300, years: "2006–כיום", network: "Nepal Television", desc: "הסיטקום הנפאלי הארוך ביותר — חיי כפר בנפאל עם דמות דורמוש שחוזר ושוב נכנס לצרות. חוקר את חיי הכפר, השלטון המקומי והתרבות הנפאלית בדרך קומית.", descEn: "Nepal's longest-running sitcom — village life featuring the character Dhurmush who repeatedly gets into trouble. Explores rural life, local governance and Nepali culture through comedy.", tags: ["נפאלי"] },
+  { name: "Jire Khursani", nameEn: "Jire Khursani (Tiny Hot Chillies)", city: "קטמנדו, נפאל", cityEn: "Kathmandu, Nepal", lat: 27.717, lng: 85.314, years: "2003–2015", network: "Nepal Television", desc: "דרמה-קומדיה על משפחה מתפקדת-לא-טוב בנפאל עם דמויות צבעוניות כמו מונדרה — בוגר גאה — ובהוקה שתמיד רעב. אחת התוכניות הנצפות ביותר בנפאל.", descEn: "Comedy-drama about a dysfunctional Nepali family featuring colorful characters like Mundre the proud graduate and Bhoke who is perpetually hungry. One of Nepal's most-watched shows.", tags: ["נפאלי"] },
+
+  // ── מלזי ──────────────────────────────────────────────────────────────
+  { name: "Kopitiam", city: "קואלה לומפור, מלזיה", cityEn: "Kuala Lumpur, Malaysia", lat: 3.149, lng: 101.697, years: "1998–2003", network: "NTV7", desc: "סיטקום מלזי בשפה האנגלית המתרחש בבית קפה שכונתי — שבע עונות על חברים שמגלים את החיים, האהבה והאוכל. זכה בפרסי Asian Television Awards.", descEn: "Malaysian English-language sitcom set in a neighborhood kopitiam (coffee shop) — seven seasons of friends figuring out life, love and food. Won Asian Television Awards recognition.", tags: ["מלזי"] },
+
+  // ── אינדונזי ──────────────────────────────────────────────────────────────
+  { name: "Tetangga Masa Gitu?", nameEn: "Tetangga Masa Gitu? (What an Annoying Neighbour!)", city: "ג'קרטה, אינדונזיה", cityEn: "Jakarta, Indonesia", lat: -6.200, lng: 106.816, years: "2014–2017", network: "NET.", desc: "שני זוגות שכנים בג'קרטה — זוג ותיק ונשואים טריים — מתמודדים עם חיי יומיום ואי-הבנות קומיות. הסיטקום האינדונזי הפופולרי ביותר של שנות ה-2010.", descEn: "Two neighboring couples in Jakarta — a long-married pair and newlyweds — navigate daily life and comic misunderstandings. Indonesia's most popular sitcom of the 2010s.", tags: ["אינדונזי"] },
+
+  // ── הונג קונגי ──────────────────────────────────────────────────────────────
+  { name: "皆大歡喜", nameEn: "Virtues of Harmony", city: "הונג קונג", cityEn: "Hong Kong", lat: 22.302, lng: 114.177, years: "2001–2002", network: "TVB Jade", desc: "סיטקום היסטורי של TVB המתרחש בתקופת שושלת מינג — על משפחת קאם העשירה ושכניה. 500+ פרקים הפכו אותו לאחד הסיטקומים הפופולריים בכל הזמנים בהונג קונג.", descEn: "TVB historical sitcom set in the Ming Dynasty — following the wealthy Kam family and their neighbors. 500+ episodes made it one of the most popular sitcoms of all time in Hong Kong.", tags: ["הונג קונגי"] },
+  { name: "愛·回家", nameEn: "Come Home Love", city: "הונג קונג", cityEn: "Hong Kong", lat: 22.319, lng: 114.169, years: "2012–כיום", network: "TVB Jade", desc: "סיטקום יומי של TVB על חיי משפחה בהונג קונג — אחת הסדרות הארוכות ביותר בטלוויזיה ההונג קונגית עם אלפי פרקים.", descEn: "TVB daily sitcom about family life in Hong Kong — one of the longest-running series in Hong Kong TV history with thousands of episodes.", tags: ["הונג קונגי"] },
+
+  // ── סרי לנקי ──────────────────────────────────────────────────────────────
+  { name: "Kopi Kade", city: "קולומבו, סרי לנקה", cityEn: "Colombo, Sri Lanka", lat: 6.927, lng: 79.861, years: "1987–כיום", network: "ITN", desc: "הסיטקום הסרי לנקי הארוך ביותר — שידר מ-1987 ללא הפסקה, עם הפרק ה-2000 בשנת 2024. דרמה-קומדיה שבועית שהפכה לחלק בלתי נפרד מהתרבות הסרי לנקית.", descEn: "Sri Lanka's longest-running sitcom — on air continuously since 1987, reaching its 2,000th episode in 2024. A weekly comedy-drama that became an inseparable part of Sri Lankan culture.", tags: ["סרי לנקי"] },
+
+  // ── ג'מייקני ──────────────────────────────────────────────────────────────
+  { name: "Lime Tree Lane", city: "קינגסטון, ג'מייקה", cityEn: "Kingston, Jamaica", lat: 17.998, lng: -76.795, years: "1988–1997", network: "JBC", desc: "הסיטקום הג'מייקאי הראשון — 9 עונות על חיי שכונה עירונית בקינגסטון, שחקרה את החיים העממיים והמעמד הבינוני. קפיצת מדרגה לקריירות של שחקנים ג'מייקאיים רבים.", descEn: "Jamaica's first sitcom — 9 seasons of neighborhood life in Kingston, exploring working-class and middle-class Jamaican life. A career launchpad for many Jamaican actors.", tags: ["ג'מייקני"] },
+
+  // ── פוארטו ריקאני ──────────────────────────────────────────────────────────────
+  { name: "Los García", city: "סן חואן, פוארטו ריקו", cityEn: "San Juan, Puerto Rico", lat: 18.465, lng: -66.116, years: "1970–1976", network: "WAPA-TV", desc: "הסיטקום הפוארטו ריקאני הקלאסי — משפחת גארסיה ושכניה בסן חואן. נחשב לתוכנית הטלוויזיה עם הדירוגים הגבוהים ביותר בפוארטו ריקו ב-3 מתוך 6 שנות שידורו.", descEn: "The classic Puerto Rican sitcom — the García family and their neighbors in San Juan. Rated the highest-rated TV program in Puerto Rico in 3 of its 6 broadcast years.", tags: ["פוארטו ריקאני"] },
 ];
 
 export const ALL_TAGS: Tag[] = [
@@ -204,6 +316,12 @@ export const ALL_TAGS: Tag[] = [
   "פולני", "צ'כי", "רומני", "פיני", "ברזילאי", "ארגנטינאי", "נורווגי", "דני", "אוסטרלי", "ניו זילנדי", "שוויצרי", "פיליפיני",
   "רוסי", "אוקראיני", "הולנדי", "בלגי", "צ'ילאני", "קולומביאני",
   "יווני", "דרום אפריקאי", "הודי", "סעודי", "יפני", "קוריאני", "סיני",
+  "וייטנאמי", "ניגרי", "מצרי", "גאני",
+  "אוסטרי", "הונגרי", "קרואטי", "סרבי", "בולגרי", "קפריסאי",
+  "פרואני", "ונצואלאי", "אורוגוואי",
+  "סלובני", "ארמני", "גאורגי", "איסלנדי",
+  "תאילנדי", "נפאלי", "מלזי", "אינדונזי",
+  "הונג קונגי", "סרי לנקי", "ג'מייקני", "פוארטו ריקאני",
 ];
 
 export const TAG_COLORS: Record<Tag, string> = {
@@ -245,6 +363,31 @@ export const TAG_COLORS: Record<Tag, string> = {
   "יפני":         "#922B21",
   "קוריאני":      "#5B2C6F",
   "סיני":         "#C0392B",
+  "וייטנאמי":     "#C62828",
+  "ניגרי":        "#2E7D32",
+  "מצרי":         "#AD6F07",
+  "גאני":         "#6A1B9A",
+  "אוסטרי":       "#C62828",
+  "הונגרי":       "#6D4C41",
+  "קרואטי":       "#1565C0",
+  "סרבי":         "#AD1457",
+  "בולגרי":       "#2E7D32",
+  "קפריסאי":      "#00838F",
+  "פרואני":       "#E65100",
+  "ונצואלאי":     "#558B2F",
+  "אורוגוואי":    "#283593",
+  "סלובני":       "#1B5E20",
+  "ארמני":        "#B71C1C",
+  "גאורגי":       "#880E4F",
+  "איסלנדי":      "#01579B",
+  "תאילנדי":      "#4A148C",
+  "נפאלי":        "#B71C1C",
+  "מלזי":         "#1A237E",
+  "אינדונזי":     "#C62828",
+  "הונג קונגי":   "#7B1FA2",
+  "סרי לנקי":     "#E65100",
+  "ג'מייקני":     "#F9A825",
+  "פוארטו ריקאני":"#1565C0",
 };
 
 export const TAG_VIEWS: Record<Tag, [number, number, number]> = {
@@ -286,4 +429,29 @@ export const TAG_VIEWS: Record<Tag, [number, number, number]> = {
   "יפני":         [36.5, 138.0,   5],
   "קוריאני":      [37.5, 127.0,   7],
   "סיני":         [32.0, 116.0,   4],
+  "וייטנאמי":     [14.0, 108.0,   5],
+  "ניגרי":        [ 9.0,   8.0,   5],
+  "מצרי":         [26.0,  30.0,   5],
+  "גאני":         [ 7.9,  -1.0,   6],
+  "אוסטרי":       [47.5,  13.5,   7],
+  "הונגרי":       [47.0,  19.5,   7],
+  "קרואטי":       [45.1,  16.5,   7],
+  "סרבי":         [44.0,  21.0,   7],
+  "בולגרי":       [42.7,  25.5,   7],
+  "קפריסאי":      [35.0,  33.0,   8],
+  "פרואני":       [-10.0, -75.0,  5],
+  "ונצואלאי":     [ 8.0,  -66.0,  5],
+  "אורוגוואי":    [-33.0, -56.0,  6],
+  "סלובני":       [46.1,  14.8,   7],
+  "ארמני":        [40.0,  45.0,   7],
+  "גאורגי":       [42.0,  43.5,   7],
+  "איסלנדי":      [65.0, -18.0,   6],
+  "תאילנדי":      [15.0, 101.0,   5],
+  "נפאלי":        [28.0,  84.0,   6],
+  "מלזי":         [ 4.0, 109.0,   5],
+  "אינדונזי":     [-2.5, 118.0,   4],
+  "הונג קונגי":   [22.3, 114.2,   9],
+  "סרי לנקי":     [ 7.9,  80.7,   7],
+  "ג'מייקני":     [18.1, -77.3,   8],
+  "פוארטו ריקאני":[18.2, -66.5,   9],
 };

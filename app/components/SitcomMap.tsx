@@ -31,6 +31,7 @@ export default function SitcomMap() {
   const [lang, setLang] = useState<Lang>("he");
   const [mapReady, setMapReady] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
+  const filterRefDesktop = useRef<HTMLDivElement>(null);
 
   const t = UI[lang];
   const dir = lang === "he" ? "rtl" : "ltr";
@@ -126,6 +127,7 @@ export default function SitcomMap() {
         mapInstanceRef.current.removeLayer(marker);
       }
     });
+    mapInstanceRef.current.invalidateSize();
     if (activeTag) {
       const [lat, lng, zoom] = TAG_VIEWS[activeTag];
       mapInstanceRef.current.setView([lat, lng], zoom);
@@ -150,15 +152,25 @@ export default function SitcomMap() {
     setFilterOpen(false);
   }
 
-  // close filter panel on outside click
+  // close filter panel on outside click (check both mobile + desktop refs)
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
-        setFilterOpen(false);
-      }
+      const t = e.target as Node;
+      const insideMobile = filterRef.current?.contains(t);
+      const insideDesktop = filterRefDesktop.current?.contains(t);
+      if (!insideMobile && !insideDesktop) setFilterOpen(false);
     }
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  // keep Leaflet sized correctly whenever the window resizes
+  useEffect(() => {
+    function onResize() {
+      mapInstanceRef.current?.invalidateSize();
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const tagCount = (tag: Tag) => shows.filter((s) => s.tags.includes(tag)).length;
@@ -235,35 +247,49 @@ export default function SitcomMap() {
               )}
             </button>
 
+            {/* Mobile filter overlay — fixed full-screen */}
             {filterOpen && (
-              <div
-                className="absolute top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 p-3"
-                style={{ width: "min(420px, 92vw)", direction: dir, [lang === "he" ? "right" : "left"]: 0 }}
-              >
-                <button
-                  onClick={() => selectTag(null)}
-                  className="w-full mb-2 px-3 py-1.5 rounded-lg text-sm border transition-colors"
-                  style={activeTag === null
-                    ? { background: "#1f2937", color: "#fff", borderColor: "#1f2937", textAlign: lang === "he" ? "right" : "left" }
-                    : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
+              <>
+                {/* backdrop */}
+                <div className="fixed inset-0 bg-black/30 z-40" onClick={() => setFilterOpen(false)} />
+                <div
+                  className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl shadow-2xl z-50 flex flex-col"
+                  style={{ maxHeight: "80vh", direction: dir }}
                 >
-                  {t.all} — {shows.length} {t.sitcoms}
-                </button>
-                <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))" }}>
-                  {ALL_TAGS.map((tag) => (
-                    <button key={tag} onClick={() => selectTag(tag)}
-                      className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs border transition-colors"
-                      style={activeTag === tag
-                        ? { background: TAG_COLORS[tag], color: "#fff", borderColor: TAG_COLORS[tag], textAlign: lang === "he" ? "right" : "left" }
+                  {/* handle + header */}
+                  <div className="flex items-center justify-between px-4 pt-3 pb-2 border-b border-gray-100 flex-shrink-0">
+                    <span className="text-sm font-semibold text-gray-700">{t.filterPlaceholder}</span>
+                    <button onClick={() => setFilterOpen(false)} className="text-gray-400 text-xl leading-none">×</button>
+                  </div>
+
+                  {/* scrollable list */}
+                  <div className="overflow-y-auto flex-1 p-3">
+                    <button
+                      onClick={() => selectTag(null)}
+                      className="w-full mb-2 px-3 py-2 rounded-lg text-sm border transition-colors"
+                      style={activeTag === null
+                        ? { background: "#1f2937", color: "#fff", borderColor: "#1f2937", textAlign: lang === "he" ? "right" : "left" }
                         : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
                     >
-                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }} />
-                      <span className="truncate">{tagLabel(tag)}</span>
-                      <span className="opacity-60 flex-shrink-0 ml-auto">({tagCount(tag)})</span>
+                      {t.all} — {shows.length} {t.sitcoms}
                     </button>
-                  ))}
+                    <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+                      {ALL_TAGS.map((tag) => (
+                        <button key={tag} onClick={() => selectTag(tag)}
+                          className="flex items-center gap-1.5 px-2 py-2 rounded-lg text-xs border transition-colors"
+                          style={activeTag === tag
+                            ? { background: TAG_COLORS[tag], color: "#fff", borderColor: TAG_COLORS[tag] }
+                            : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb" }}
+                        >
+                          <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }} />
+                          <span className="truncate flex-1">{tagLabel(tag)}</span>
+                          <span className="opacity-50 flex-shrink-0">({tagCount(tag)})</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
 
@@ -304,7 +330,7 @@ export default function SitcomMap() {
           </div>
 
           {/* Filter */}
-          <div className="relative" ref={filterRef}>
+          <div className="relative" ref={filterRefDesktop}>
             <button
               onClick={() => { setFilterOpen((v) => !v); setSearchOpen(false); }}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm transition-colors"
@@ -325,31 +351,37 @@ export default function SitcomMap() {
 
             {filterOpen && (
               <div
-                className="absolute top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 p-3"
-                style={{ width: "min(420px, 92vw)", direction: dir, [lang === "he" ? "right" : "left"]: 0 }}
+                className="absolute top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl z-50 flex flex-col"
+                style={{ width: 580, maxHeight: "72vh", direction: dir, [lang === "he" ? "right" : "left"]: 0 }}
               >
-                <button
-                  onClick={() => selectTag(null)}
-                  className="w-full mb-2 px-3 py-1.5 rounded-lg text-sm border transition-colors"
-                  style={activeTag === null
-                    ? { background: "#1f2937", color: "#fff", borderColor: "#1f2937", textAlign: lang === "he" ? "right" : "left" }
-                    : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
-                >
-                  {t.all} — {shows.length} {t.sitcoms}
-                </button>
-                <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(110px, 1fr))" }}>
-                  {ALL_TAGS.map((tag) => (
-                    <button key={tag} onClick={() => selectTag(tag)}
-                      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs border transition-colors"
-                      style={activeTag === tag
-                        ? { background: TAG_COLORS[tag], color: "#fff", borderColor: TAG_COLORS[tag], textAlign: lang === "he" ? "right" : "left" }
-                        : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
-                    >
-                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }} />
-                      <span className="truncate">{tagLabel(tag)}</span>
-                      <span className="opacity-60 flex-shrink-0 ml-auto">({tagCount(tag)})</span>
-                    </button>
-                  ))}
+                {/* sticky "All" button */}
+                <div className="px-3 pt-3 pb-2 flex-shrink-0">
+                  <button
+                    onClick={() => selectTag(null)}
+                    className="w-full px-3 py-1.5 rounded-lg text-sm border transition-colors"
+                    style={activeTag === null
+                      ? { background: "#1f2937", color: "#fff", borderColor: "#1f2937", textAlign: lang === "he" ? "right" : "left" }
+                      : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
+                  >
+                    {t.all} — {shows.length} {t.sitcoms}
+                  </button>
+                </div>
+                {/* scrollable grid */}
+                <div className="overflow-y-auto px-3 pb-3" style={{ scrollbarWidth: "thin" }}>
+                  <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+                    {ALL_TAGS.map((tag) => (
+                      <button key={tag} onClick={() => selectTag(tag)}
+                        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs border transition-colors"
+                        style={activeTag === tag
+                          ? { background: TAG_COLORS[tag], color: "#fff", borderColor: TAG_COLORS[tag], textAlign: lang === "he" ? "right" : "left" }
+                          : { background: "#f9fafb", color: "#374151", borderColor: "#e5e7eb", textAlign: lang === "he" ? "right" : "left" }}
+                      >
+                        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: activeTag === tag ? "#fff" : TAG_COLORS[tag] }} />
+                        <span className="truncate flex-1">{tagLabel(tag)}</span>
+                        <span className="opacity-50 flex-shrink-0">({tagCount(tag)})</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
